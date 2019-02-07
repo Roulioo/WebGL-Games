@@ -1,0 +1,35 @@
+body{
+    /*background-image: url(../gif/sapin.gif);*/
+    background-image: url(../img/planete.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*width: 100%;*/
+    /*height: 100%;*/
+}
+
+p{
+    color: #CED8F6;
+    position : absolute; /* Permet un positionnement avec aucun espace vide après être positionné*/
+    top: 0%; left: 31%;
+    /*transform : translate(-50%, -50%);*/
+    font-style:italic;
+    font-size:60px;
+}
+
+#access_picture{
+    color:white;
+    position : absolute;
+    top: 84%; left: 74%;
+    font-style:italic;
+    font-size:30px;
+}
+
+#access_game{
+    color:white;
+    position : absolute;
+    top: 90%; left: 74%;
+    /*transform : translate(-50%, -50%);*/
+    font-style:italic;
+    font-size:30px;
+}

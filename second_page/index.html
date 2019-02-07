@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+    <html lang="fr">
+
+            <head>
+                <title>Forest</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta content="Début Three.js" name="Three.js"> 
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <!-- Permet d'éviter toute marge -->
+                <style>
+                    html, body {
+						width: 100%;
+						height: 100%;
+					}
+					body {
+						background-color: #ffffff;
+						overflow: hidden;
+						font-family: arial;
+                        margin : 0;
+                        padding : 0;
+                        overflow : hidden; 
+                        font-family: Arial, Helvetica, sans-serif;
+					}
+					#blocker {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						background-color: rgba(0,0,0,0.5);
+					}
+					#instructions {
+						width: 100%;
+						height: 100%;
+						display: -webkit-box;
+						display: -moz-box;
+						display: box;
+						-webkit-box-orient: horizontal;
+						-moz-box-orient: horizontal;
+						box-orient: horizontal;
+						-webkit-box-pack: center;
+						-moz-box-pack: center;
+						box-pack: center;
+						-webkit-box-align: center;
+						-moz-box-align: center;
+						box-align: center;
+						color: #ffffff;
+						text-align: center;
+						cursor: pointer;
+					}
+                    #score{
+                        color : white;
+                        position : absolute;
+                        top: 5%; left: 90%;
+                        font-size : 20px;
+                    }
+                    #life{
+                        color : white;
+                        position : absolute;
+                        top: 90%; left: 90%;
+                        font-size : 20px;
+                    }
+                </style>
+            </head>
+
+            <body>
+
+        		<div id="blocker">
+					<div id="instructions">
+						<span style="font-size:40px">Click to play</span>
+						<br />
+						<!--(W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)-->
+                        (W, A, S, D = Move, P = Pause)
+					</div>
+				</div>
+
+                <div id="score">
+                    <!-- affichage du score gérer directement dans le script -->
+                </div>
+
+                <div id="life">
+                    <!-- affichage de la vie gérer directement dans le script en dessous -->
+                </div>
+
+                <!-- On charge nos différents modules -->
+                <script src="js/three_min.js"> </script>
+				<script src="./js/stats.js"> </script>
+                <script src="js/forest.js"> </script>
+                <script src="js/gfx_engine.js"> </script>
+                <script src="js/game.js"> </script>
+                <script src="js/MapControls.js"> </script>
+                <script src="js/PointerLockControls.js"> </script>
+                <script src="js/dat.gui.min.js"> </script>
+                <script src="js/FBXLoader.js"> </script>
+                <script src="js/inflate.min.js"> </script>
+                <script src="js/PointerLockControls.js"> </script>
+                <script>
+                    forest.start({
+                        debug_mode : true , // -- va gérer les stats  
+                        high_performance : false , // -- va gérer les performances avec le antilizing et ombres
+                        gfx_engine : {
+                            camera_fov : 50,
+                            far_plan : 2500 // -- selon la taille de mon champ je modifie mon far plan 
+                        }, // Va gérer la caméra sur le web 
+                        game : {
+                            nb_trees : 5, // -- nombre d'arbres à générer
+                            speed : 1, // -- rapidité du déplacement
+                        },
+                        score : 0 
+                    }); // -- début du lancement de forest 
+                </script>
+
+            </body>
+
+    </html>
