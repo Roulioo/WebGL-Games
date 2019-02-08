@@ -146,11 +146,17 @@ forest.game = {
             const material6 = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture6 } );
             
             const mesh = new THREE.Mesh( geometry, material );
+            mesh.collision = false;
             const mesh2 = new THREE.Mesh( geometry, material2 );
+            mesh2.collision = false;
             const mesh3 = new THREE.Mesh( geometry, material3 );
+            mesh3.collision = false;
             const mesh4 = new THREE.Mesh( geometry, material4 );
+            mesh4.collision = false;
             const mesh5 = new THREE.Mesh( geometry, material5 );
+            mesh5.collision = false;
             const mesh6 = new THREE.Mesh( geometry, material6 );
+            mesh6.collision = false;
 
             let tab_mesh = [mesh,mesh2,mesh3,mesh4,mesh5,mesh6];
             let random = this.entierAleatoire(0,5);
@@ -254,13 +260,13 @@ forest.game = {
                 &&
                 ship_position.y <= forest.game.trees[i].position.y + radius
                 && 
-                forest.game.life_bool == false){
+                forest.game.trees[i].collision == false){
                     forest.game.life -= 1;
-                    forest.game.life_bool = true;
+                    forest.game.trees[i].collision = true;
                 }
 
             if(forest.game.life <= 0){
-                window.location()
+                window.location = "gameover.html";
             }
 
         }

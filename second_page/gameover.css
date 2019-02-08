@@ -1,5 +1,5 @@
 body {
-    background-image: url("../gif/game_over.gif");
+    background-image: url("game_over.gif");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
