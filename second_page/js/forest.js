@@ -4,7 +4,8 @@ const forest = {
 
         const blocker = document.getElementById("blocker");
         const instructions = document.getElementById("instructions");
-   
+        const audio = document.getElementById("audio");
+        const audio_muted = document.getElementById("audio_muted");
 
         // -- dès qu'on clique on affiche le jeux
         instructions.addEventListener(
@@ -13,6 +14,7 @@ const forest = {
             function(){
                     instructions.style.display = "none";
                     blocker.style.display = "none";
+                    audio;
                     forest.game.pause = false;
             });
 
@@ -22,6 +24,7 @@ const forest = {
                 instructions.style.display = "";
                 blocker.style.display = "";
                 forest.game.pause = true;
+                audio_muted;
                 console.log("pause");
                 break;
             }

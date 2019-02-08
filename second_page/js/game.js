@@ -5,6 +5,7 @@ forest.game = {
     // -- tableau contenant nos arbres
     trees : [],
 
+    // -- la pause
     pause : true,
 
     // -- nombre d'arbre
@@ -57,13 +58,14 @@ forest.game = {
             console.log(object);
             //forest.game.ship = object.children[0];
             forest.game.ship = object;
-            forest.game.ship.position.set(0,-2, -10);
+            forest.game.ship.position.set(0,-2, -9);
             forest.game.ship.rotateY(THREE.Math.degToRad(-180))
             forest.game.ship.scale.set(0.004, 0.004, 0.004);
             console.log("avant");
             
             // forest.gfx_engine.scene.add(light);*/
             forest.gfx_engine.camera.add(forest.game.ship);
+            console.log("ajout scene"); 
             //gfx_engine.camera.add(forest.game.ship);
 
             console.log("ship added !");
@@ -143,8 +145,8 @@ forest.game = {
             
             tab_mesh[random].scale.set(0.02,0.02,0.02);
             tab_mesh[random].position.set(
-                this.entierAleatoire(-18,22),
-                this.entierAleatoire(-18,10),
+                this.entierAleatoire(-19,22),
+                this.entierAleatoire(-18,14),
                 this.entierAleatoire(-30,-2500)
             );
 
@@ -174,16 +176,18 @@ forest.game = {
         if(forest.game.pause == false){
             const gfx = forest.gfx_engine;
             //forest.game.ship.position.z -= 1;
-            gfx.camera.translateZ(-1);
+            gfx.camera.translateZ(-this.speed * 2);
             // -- déplacement caméra 
-            this.player.translateZ(-this.speed);
+            //forest.game.player.translateZ(-this.speed); // -- vitesse de la caméra 
+            //forest.game.ship.translateZ(0.001); // -- vitesse du ship
+           // gfx.scene.translateZ(forest.game.speed); // -- vitesse du ship
             // -- respawn 
             if(this.trees.length > 0){
                 for(let i = 0; i < this.nb_tree; i ++){
                     if(this.trees[i].position.z > this.player.position.z){
                         this.trees[i].translateZ(-this.field.height - 50);
                         this.trees[i].position.x =
-                        this.entierAleatoire(-18,22),this.entierAleatoire(-18,10),this.entierAleatoire(0,-2500) 
+                        this.entierAleatoire(-19,22),this.entierAleatoire(-18,14),this.entierAleatoire(0,-2500) 
                         // pas nécessaire car respawn est mal fait sur le plane
                         //Math.floor(Math.random() * this.field.width) - this.field.width * 0.5; 
                     }
@@ -202,7 +206,7 @@ forest.game = {
             forest.game.ship.position.x -= 1;
         }
 
-        if(forest.game.ship.position.y <= -5){
+        if(forest.game.ship.position.y <= -4){
             forest.game.ship.position.y += 1;
         }
 
