@@ -341,7 +341,7 @@ forest.game = {
                 }
 
             if(forest.game.life <= 0){
-                window.location = "gameover.html";
+                window.location = "gameover.html"; // -- on appelle notre page game over 
             }
 
         }

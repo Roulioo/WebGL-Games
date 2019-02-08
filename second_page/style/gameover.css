@@ -22,3 +22,11 @@ span{
     font-size: 120%;
     color: #CED8F6;
 }
+
+#auteur{
+    color : white;
+    position : absolute;
+    top: 94%; left: 1%;
+    font-style : italic;
+    font-size : 30px;
+}

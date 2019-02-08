@@ -33,3 +33,11 @@ p{
     font-style:italic;
     font-size:30px;
 }
+
+#auteur{
+    color : white;
+    position : absolute;
+    top: 94%; left: 1%;
+    font-style : italic;
+    font-size : 30px;
+}
