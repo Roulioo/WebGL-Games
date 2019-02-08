@@ -36,7 +36,7 @@ const forest = {
 
         // -- Debug mod 
         // -- Utiliser quand nous le mettons en production 
-        if(config.debug_mode == false){
+        if(config.debug_mode == true){
             console.log = function() {} ;
         }
 
