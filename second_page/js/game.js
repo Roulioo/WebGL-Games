@@ -17,7 +17,19 @@ forest.game = {
         height : 2500, // -- hauteur
     },
 
+    life_bool : false,
+
+    // -- vaisseau
     ship : 0,
+
+    // -- vie du joueur
+    life : 3,
+
+    // -- score du joueur
+    score : 0,
+
+    // -- rayon de nos planètes
+    meteore_radius : 5,
 
     player : null, // -- caméra
     speed : null, // -- rapidité 
@@ -90,7 +102,7 @@ forest.game = {
             case 37: // left
             case 65: // a
                 moveLeft = true;
-                forest.game.ship.position.x -= 1;
+                forest.game.ship.position.x -= 1;   
                 console.log("Left");
                 break;
             case 40: // down
@@ -117,7 +129,7 @@ forest.game = {
             // -- création sphère et texture
 
             const textureLoader = new THREE.TextureLoader();
-            const geometry = new THREE.SphereGeometry( 200, 32, 32 );
+            const geometry = new THREE.SphereGeometry( 5, 32, 32 );
 
             const texture = textureLoader.load('./texture/texture.jpg');
             const texture2 = textureLoader.load('./texture/jupiter.jpeg');
@@ -143,7 +155,7 @@ forest.game = {
             let tab_mesh = [mesh,mesh2,mesh3,mesh4,mesh5,mesh6];
             let random = this.entierAleatoire(0,5);
             
-            tab_mesh[random].scale.set(0.02,0.02,0.02);
+            //tab_mesh[random].scale.set(0.02,0.02,0.02);
             tab_mesh[random].position.set(
                 this.entierAleatoire(-19,22),
                 this.entierAleatoire(-18,14),
@@ -158,10 +170,7 @@ forest.game = {
         // -- Light 
         let light = new THREE.AmbientLight(0x404040, 2);
         forest.gfx_engine.scene.add(light);
-         
-        // -- coordonnées des arbres 
-        console.log(this.trees);
-       
+        
         // -- renderer (rendu de la scène)
         forest.gfx_engine.renderer.render(forest.gfx_engine.scene, forest.gfx_engine.camera);
         
@@ -170,13 +179,14 @@ forest.game = {
     },
     
     // -- cette fonction update est importante car utiliser dans gfx_engine pour update le jeux
-
     update : function(){
+
+        const radius = 5;
 
         if(forest.game.pause == false){
             const gfx = forest.gfx_engine;
             //forest.game.ship.position.z -= 1;
-            gfx.camera.translateZ(-this.speed * 2);
+            gfx.camera.translateZ(-this.speed);
             // -- déplacement caméra 
             //forest.game.player.translateZ(-this.speed); // -- vitesse de la caméra 
             //forest.game.ship.translateZ(0.001); // -- vitesse du ship
@@ -197,6 +207,13 @@ forest.game = {
             console.log("mode pause actived");
         }
 
+        // -- utile pour gérer les collisions 
+        const ship_position = forest.gfx_engine.camera.position.clone();
+        console.log(ship_position.add(forest.game.ship.position));
+
+        // -- position du vaisseau dans l'espace en locale
+        //console.log(forest.gfx_engine.camera.localToWorld(forest.game.ship.position));
+        //console.log(forest.game.ship.position);
         // -- collision
         if(forest.game.ship.position.x <= -7){
             forest.game.ship.position.x += 1;
@@ -218,32 +235,38 @@ forest.game = {
         const life_div = document.getElementById("life");
         const score_div = document.getElementById("score");
 
-        let life_string = "Life : "
-        let life = 3; 
-
-        let score_string = "Score : "
-        let score = 0; 
+        let life_string = "Life : " + forest.game.life;
+        let score_string = "Score : " + forest.game.score;
     
+        forest.game.score += 1;
 
         for(let i = 0; i < this.trees.length; i ++){
-            console.log("PASSER");
-            if (forest.game.ship.position.x >= forest.game.trees[i].position.x || forest.game.ship.position.x == forest.game.trees[i].position.x ) {
-                console.log(life);
-                life -= 1;
-                console.log(life);
-            }
-            if (forest.game.ship.position.x >= forest.game.trees[i].position.x) {
-                console.log(score);
-                score += 10;
-                console.log(score);
-            }
-        }    
 
-        let concat_life = life_string + life;
-        life_div.innerText = concat_life ;
+            if (ship_position.z >= forest.game.trees[i].position.z - radius  
+                &&
+                ship_position.z <= forest.game.trees[i].position.z + radius 
+                && 
+                ship_position.x >= forest.game.trees[i].position.x - radius
+                &&
+                ship_position.x <= forest.game.trees[i].position.x + radius
+                &&
+                ship_position.y >= forest.game.trees[i].position.y - radius
+                &&
+                ship_position.y <= forest.game.trees[i].position.y + radius
+                && 
+                forest.game.life_bool == false){
+                    forest.game.life -= 1;
+                    forest.game.life_bool = true;
+                }
 
-        let concat_score = score_string + score
-        score_div.innerText = concat_score ;
+            if(forest.game.life <= 0){
+                window.location()
+            }
+
+        }
+        
+        life_div.innerText = life_string ;
+        score_div.innerText = score_string ;
 
     }
 };
