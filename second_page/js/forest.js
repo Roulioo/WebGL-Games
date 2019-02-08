@@ -6,6 +6,7 @@ const forest = {
         const instructions = document.getElementById("instructions");
         const audio = document.getElementById("audio");
         const audio_muted = document.getElementById("audio_muted");
+        const audio_gameover = document.getElementById("audio_gameover");
 
         // -- dès qu'on clique on affiche le jeux
         instructions.addEventListener(
@@ -15,6 +16,7 @@ const forest = {
                     instructions.style.display = "none";
                     blocker.style.display = "none";
                     audio;
+                    audio_gameover;
                     forest.game.pause = false;
             });
 

@@ -11,6 +11,12 @@ forest.game = {
     // -- nombre d'arbre
     nb_tree : 0,
 
+    // -- déplacements
+    moveForward : false,
+    moveBackward : false,
+    moveLeft : false,
+    moveRight : false,
+
     // -- taille du plane 
     field : {
         width : 500, // -- largeur 
@@ -91,6 +97,8 @@ forest.game = {
 
         });
 
+        /*
+
         const onKeyDown = function(event) {
             switch (event.keyCode) {
             case 38: // up
@@ -121,6 +129,53 @@ forest.game = {
         };
 
         document.addEventListener("keydown", onKeyDown, false);
+
+        */
+
+        const onKeyDown = function ( event ) {
+            switch ( event.keyCode ) {
+                case 38: // up
+                case 87: // w
+                    forest.game.moveForward = true;
+                    break;
+                case 37: // left
+                case 65: // a
+                    forest.game.moveLeft = true;
+                    break;
+                case 40: // down
+                case 83: // s
+                    forest.game.moveBackward = true;
+                    break;
+                case 39: // right
+                case 68: // d
+                    forest.game.moveRight = true;
+                    break;
+            }
+        };
+
+        const onKeyUp = function ( event ) {
+            switch ( event.keyCode ) {
+                case 38: // up
+                case 87: // w
+                    forst.game.moveForward = false;
+                    break;
+                case 37: // left
+                case 65: // a
+                    forest.gamemoveLeft = false;
+                    break;
+                case 40: // down
+                case 83: // s
+                    forest.game.moveBackward = false;
+                    break;
+                case 39: // right
+                case 68: // d
+                    forest.game.moveRight = false;
+                    break;
+            }
+        };
+
+        document.addEventListener( 'keydown', onKeyDown, false );
+        document.addEventListener( 'keyup', onKeyUp, false );
 
         // -- boucle de nos sphères
         console.log(this.nb_tree)
@@ -209,6 +264,28 @@ forest.game = {
                     }
                 };
             }
+
+            // -- incrémentation du score
+            forest.game.score += 1;
+            
+            // -- gestion des déplacements
+            if(forest.game.moveForward == true){
+                forest.game.ship.translateY(1);
+                forest.game.moveForward = false;
+            } 
+            if(forest.game.moveBackward == true){
+                forest.game.ship.translateY(-1);
+                forest.game.moveBackward = false;
+            } 
+            if(forest.game.moveLeft == true){
+                forest.game.ship.translateX(1);
+                forest.game.moveLeft = false;
+            } 
+            if(forest.game.moveRight == true){
+                forest.game.ship.translateX(-1);
+                forest.game.moveRight = false;
+            } 
+            
         }else{
             console.log("mode pause actived");
         }
@@ -243,8 +320,6 @@ forest.game = {
 
         let life_string = "Life : " + forest.game.life;
         let score_string = "Score : " + forest.game.score;
-    
-        forest.game.score += 1;
 
         for(let i = 0; i < this.trees.length; i ++){
 
