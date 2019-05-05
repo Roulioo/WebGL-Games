@@ -27,6 +27,4 @@ I think everything is good to play in the best conditions.
 
 If ever I made errors in my code and it does not work well, don't hesitate to contribute and help me.
 
-Before to try my game, you must to know that my game don't fonctionne very well because I have some things to modify such the score and life which increase or decrease when they don't must. And the collision with planets. I think that in four working days, it's a good start.
-
 Thanks and enjoy.
